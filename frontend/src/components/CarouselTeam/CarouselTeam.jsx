@@ -6,8 +6,8 @@ import { Ragil } from "../../assets/image/team/Ragil";
 import { Hendra } from "../../assets/image/team/hendra";
 import { Decka } from "../../assets/image/team/decka";
 import { Rosalinda } from "../../assets/image/team/Rosalinda";
+import { Dhimas } from "../../assets/image/team/dhimas";
 import { motion } from "framer-motion";
-
 
 const AnimatedTitle = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -16,9 +16,9 @@ const AnimatedTitle = () => {
     const handleLoad = () => {
       setIsVisible(true);
     };
-    
+
     handleLoad();
-    
+
     return () => window.removeEventListener("load", handleLoad);
   }, []);
 
@@ -42,9 +42,9 @@ function Card({ image, nama, job, univ }) {
         <img src={image} alt="team" className="h-44 w-44 rounded-full" />
       </div>
       <div className="p-5 text-center">
-          <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white font-Roboto">
-            {nama}
-          </h5>
+        <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white font-Roboto">
+          {nama}
+        </h5>
         <h3 className="mb-3 font-semibold font-Roboto text-gray-700 dark:text-gray-400">
           {job}
         </h3>
@@ -97,7 +97,8 @@ function Carousel() {
         const elementTop = triggerElement.offsetTop;
         const elementHeight = triggerElement.offsetHeight;
         const isInView =
-          scrollTop + windowHeight > elementTop && scrollTop < elementTop + elementHeight;
+          scrollTop + windowHeight > elementTop &&
+          scrollTop < elementTop + elementHeight;
 
         setIsVisible(isInView);
       }
@@ -123,8 +124,14 @@ function Carousel() {
     <Slider
       {...settings}
       className={isVisible ? "carousel visible" : "carousel"}
-      style={{ overflow: 'hidden' }} 
+      style={{ overflow: "hidden" }}
     >
+      <AnimatedCard
+        image={Dhimas}
+        nama="Dhimas Adinata"
+        job="Husler"
+        univ="Universitas Ahmad Dahlan"
+      />
       <AnimatedCard
         image={Ragil}
         nama="Ragil Tri Saputro"
@@ -145,7 +152,7 @@ function Carousel() {
       />
       <AnimatedCard
         image={Rosalinda}
-        nama="M. Hendra Setiawan"
+        nama="Rosalinda Gadiseli S"
         job="Hipster"
         univ="Universitas Methodist Indonesia"
       />
@@ -156,19 +163,12 @@ function Carousel() {
 // Komponen panah navigasi untuk slider
 const NextArrow = (props) => {
   const { onClick } = props;
-  return (
-    <div className="slick-arrow next" onClick={onClick}>
-
-    </div>
-  );
+  return <div className="slick-arrow next" onClick={onClick}></div>;
 };
 
 const PrevArrow = (props) => {
   const { onClick } = props;
-  return (
-    <div className="slick-arrow prev" onClick={onClick}>
-    </div>
-  );
+  return <div className="slick-arrow prev" onClick={onClick}></div>;
 };
 
 export default function CarouselTeam() {
@@ -183,6 +183,5 @@ export default function CarouselTeam() {
         </div>
       </div>
     </div>
-  )
+  );
 }
-

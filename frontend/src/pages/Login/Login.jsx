@@ -6,11 +6,15 @@ import { MdEmail } from "react-icons/md";
 import { RiLockPasswordFill } from "react-icons/ri";
 import Loading from "../../components/Loading/Loading";
 import { useNavigate } from "react-router-dom";
+import Modal from "../../components/Modal/Login/LoginModal";
 
 export default function Login() {
   const [isLoading, setIsLoading] = useState(true);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [modalMessage, setModalMessage] = useState("");
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
+  const [showErrorModal, setShowErrorModal] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -23,7 +27,7 @@ export default function Login() {
 
   const handleLoginClick = async () => {
     try {
-      const response = await fetch("http://localhost:5000/api/users/login", {
+      const response = await fetch("http://localhost:5000/api/auth/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -33,15 +37,31 @@ export default function Login() {
 
       const result = await response.json();
       if (response.ok) {
-        alert("Login berhasil!");
-        navigate("/dashboard");
+        setModalMessage("Login berhasil!");
+        setShowSuccessModal(true);
+        localStorage.setItem("token", result.token);
       } else {
-        alert(result.message || "Login gagal!");
+        if (response.status === 401) {
+          setModalMessage("Email atau Kata Sandi Anda Salah");
+        } else {
+          setModalMessage(result.message || "Masuk gagal!");
+        }
+        setShowErrorModal(true);
       }
     } catch (error) {
       console.error("Error during login:", error);
-      alert("Terjadi kesalahan. Silakan coba lagi.");
+      setModalMessage("Terjadi kesalahan. Silakan coba lagi.");
+      setShowErrorModal(true);
     }
+  };
+
+  const closeSuccessModal = () => {
+    setShowSuccessModal(false);
+    navigate("/dashboard");
+  };
+
+  const closeErrorModal = () => {
+    setShowErrorModal(false);
   };
 
   return (
@@ -95,7 +115,7 @@ export default function Login() {
                       <div className="relative my-8">
                         <input
                           type="password"
-                          placeholder="Password"
+                          placeholder="Kata Sandi"
                           className="bg-[#ECECEC] dark:bg-white dark:text-gray-200 text-[#2F2F2F] font-semibold font-Roboto py-2 pl-14 pr-2 w-full rounded shadow-md"
                           onChange={(e) => setPassword(e.target.value)}
                           value={password}
@@ -115,13 +135,13 @@ export default function Login() {
                           htmlFor="rememberMe"
                           className="text-gray-600 font-Roboto dark:text-gray-200"
                         >
-                          Remember Me
+                          Ingatkan Saya
                         </label>
                         <a
                           href="#"
                           className="text-[#20B486] ml-8 lg:ml-40 md:ml-[340px] font-Roboto hover:text-gray-400 dark:text-gray-200 dark:hover:text-white"
                         >
-                          Forgot Password?
+                          Lupa Katasandi?
                         </a>
                       </div>
 
@@ -135,13 +155,13 @@ export default function Login() {
                       </div>
                       <div className="flex justify-center items-center gap-4 mt-8">
                         <h2 className="font-Roboto text-black dark:text-white">
-                          Don’t have an account?
+                          Apakah Kamu Belum Mempunyai Akun ?
                         </h2>
                         <a
                           href="./registrasi"
                           className="font-Roboto text-[#20B486] hover:text-gray-400 dark:text-gray-200 dark:hover:text-gray-200"
                         >
-                          Register
+                          Daftar
                         </a>
                       </div>
                     </div>
@@ -152,6 +172,26 @@ export default function Login() {
           </div>
         </div>
       )}
+
+      {/* Success Modal */}
+      <Modal
+        show={showSuccessModal}
+        onClose={closeSuccessModal}
+        title="Masuk Berhasil"
+        type="success"
+      >
+        <p className="text-lg text-gray-800 dark:text-white">{modalMessage}</p>
+      </Modal>
+
+      {/* Error Modal */}
+      <Modal
+        show={showErrorModal}
+        onClose={closeErrorModal}
+        title="Masuk Gagal"
+        type="error"
+      >
+        <p className="text-lg text-gray-800 dark:text-white">{modalMessage}</p>
+      </Modal>
     </>
   );
 }

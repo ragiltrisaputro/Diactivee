@@ -37,7 +37,7 @@ export default function ModulPopuler() {
   };
 
   const handleFlutterClick = () => {
-    navigate("/modul-flutter");
+    navigate("/modul-dart");
   };
 
   const handleCssClick = () => {
@@ -45,7 +45,7 @@ export default function ModulPopuler() {
   };
 
   const handleNewClick = () => {
-    navigate("/modul-new");
+    navigate("/modul-javascript");
   };
 
   const desktopCards = [
@@ -75,14 +75,12 @@ export default function ModulPopuler() {
       content:
         "Kelas Dart dan Flutter Dasar adalah kursus untuk pemula dalam pengembangan aplikasi mobile",
       imageSrc: Dart,
-      onClick: () => {
-        /* Define your handler */
-      },
+      onClick: handleFlutterClick,
     },
   ];
   return (
     <div>
-      <div className="mt-16 pt-8 bg-white dark:bg-gray-900 min-h-screen">
+      <div className="mt-16 pt-8 bg-white dark:bg-gray-900 min-h-screen pb-10">
         <div className="mx-8 mb-4 md:mx-16 lg:mx-28 font-Roboto">
           <h2 className="text-2xl md:text-3xl font-bold text-[#20B486] dark:text-white">
             Modul Terpopuler

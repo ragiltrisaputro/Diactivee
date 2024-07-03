@@ -1,8 +1,12 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const { register, login } = require('../controllers/userController');
+const userController = require("../controllers/userController");
+const auth = require("../middleware/auth");
 
-router.post('/register', register);
-router.post('/login', login);
+// Rute untuk update profil
+router.put("/profile", auth, userController.updateProfile);
+
+// Rute untuk mendapatkan profil pengguna
+router.get("/profile", auth, userController.getProfile);
 
 module.exports = router;

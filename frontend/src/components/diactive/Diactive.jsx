@@ -8,7 +8,7 @@ function About({ title, image, description, title2, isVisible }) {
     <motion.section
       initial="hidden"
       animate={isVisible ? "show" : "hidden"}
-      variants={fadeIn("right", 0.5)} 
+      variants={fadeIn("right", 0.5)}
       className="pt-20 md:ml-10 md:pt-24 xl:pt-24 pb-12"
       id="about-section"
     >
@@ -16,7 +16,7 @@ function About({ title, image, description, title2, isVisible }) {
         <motion.h2
           initial="hidden"
           animate={isVisible ? "show" : "hidden"}
-          variants={fadeIn("right", 0.5)} 
+          variants={fadeIn("right", 0.5)}
           className="text-2xl md:text-3xl font-bold font-Roboto text-black dark:text-white"
         >
           {title}
@@ -27,29 +27,37 @@ function About({ title, image, description, title2, isVisible }) {
           <motion.div
             initial="hidden"
             animate={isVisible ? "show" : "hidden"}
-            variants={fadeIn("right", 0.5)} 
-            className="w-full self-center px-8 lg:px-20 lg:w-1/2"
+            variants={fadeIn("right", 0.5)}
+            className="w-full self-center px-8 lg:px-20 lg:w-1/2 flex items-center"
           >
             <motion.img
               initial="hidden"
               animate={isVisible ? "show" : "hidden"}
-              variants={fadeIn("right", 0.5)} 
+              variants={fadeIn("right", 0.5)}
               src={image}
               alt="logo-deactivee"
-              className="md:h-[120px]"
+              className="md:h-[120px] lg:h-[160px]"
             />
+            <motion.span
+              initial="hidden"
+              animate={isVisible ? "show" : "hidden"}
+              variants={fadeIn("right", 0.5)}
+              className="ml-4 text-2xl font-bold font-Roboto text-black dark:text-white"
+            >
+              <h1 className="text-3xl lg:text-4xl">Diactivee</h1>
+            </motion.span>
           </motion.div>
           <motion.div
             initial="hidden"
             animate={isVisible ? "show" : "hidden"}
-            variants={fadeIn("left", 0.5)} 
+            variants={fadeIn("left", 0.5)}
             className="w-full self-end px-8 lg:w-1/2"
           >
             <div className="relative lg:m-9 lg:right-0">
               <motion.h1
                 initial="hidden"
                 animate={isVisible ? "show" : "hidden"}
-                variants={fadeIn("left", 0.5)} 
+                variants={fadeIn("left", 0.5)}
                 className="font-bold md:text-3xl text-2xl mb-4 font-Roboto text-white dark:text-white"
               >
                 {title2}
@@ -57,7 +65,7 @@ function About({ title, image, description, title2, isVisible }) {
               <motion.h2
                 initial="hidden"
                 animate={isVisible ? "show" : "hidden"}
-                variants={fadeIn("left", 0.5)} 
+                variants={fadeIn("left", 0.5)}
                 className="md:text-xl font-Roboto font-normal text-justify text-black dark:text-white"
               >
                 {description}
@@ -83,14 +91,15 @@ export default function Diactivee() {
       const elementTop = aboutElement.offsetTop;
       const elementHeight = aboutElement.offsetHeight;
 
-      const isInView = scrollTop + windowHeight > elementTop && scrollTop < elementTop + elementHeight;
+      const isInView =
+        scrollTop + windowHeight > elementTop &&
+        scrollTop < elementTop + elementHeight;
 
       setIsVisible(isInView);
     }
   };
 
   useEffect(() => {
-    
     handleScroll();
 
     window.addEventListener("scroll", handleScroll);

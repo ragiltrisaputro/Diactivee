@@ -4,8 +4,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { Html } from "../../assets/image/Cover/Html";
 import { Css } from "../../assets/image/Cover/Css/Css";
-import {JavaScript} from "../../assets/image/Cover/Javascript/Javascript"
-
+import { JavaScript } from "../../assets/image/Cover/Javascript/Javascript";
 
 function Card({ image, title, description, link, jenis }) {
   return (
@@ -15,7 +14,9 @@ function Card({ image, title, description, link, jenis }) {
       </a>
       <div className="p-5">
         <a href={link}>
-          <h3 className="text-sm font-normal font-Roboto my-2 text-[#22B286]">{jenis}</h3>
+          <h3 className="text-sm font-normal font-Roboto my-2 text-[#22B286]">
+            {jenis}
+          </h3>
           <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
             {title}
           </h5>
@@ -54,13 +55,13 @@ function Carousel() {
     dots: true,
     infinite: true,
     speed: 500,
-    slidesToShow: 3, 
+    slidesToShow: 3,
     slidesToScroll: 1,
     responsive: [
       {
         breakpoint: 768,
         settings: {
-          slidesToShow: 1, 
+          slidesToShow: 1,
           slidesToScroll: 1,
         },
       },
@@ -72,7 +73,7 @@ function Carousel() {
       <Card
         image={Html}
         title="HTML Dasar"
-        description="Dasar struktur website menggunakan elemen-elemen HTML."
+        description="Dasar struktur website menggunakan elemen HTML."
         link="/modul-html"
         jenis="Web Developer"
       />
@@ -97,7 +98,9 @@ const NextArrow = (props) => {
   const { className, style, onClick } = props;
   return (
     <div
-      className={className + " absolute right-0 top-1/2 transform -translate-y-1/2"}
+      className={
+        className + " absolute right-0 top-1/2 transform -translate-y-1/2"
+      }
       style={{ ...style, cursor: "pointer", zIndex: 10 }}
       onClick={onClick}
     >
@@ -121,7 +124,9 @@ const PrevArrow = (props) => {
   const { className, style, onClick } = props;
   return (
     <div
-      className={className + " absolute left-0 top-1/2 transform -translate-y-1/2"}
+      className={
+        className + " absolute left-0 top-1/2 transform -translate-y-1/2"
+      }
       style={{ ...style, cursor: "pointer", zIndex: 10 }}
       onClick={onClick}
     >
@@ -144,18 +149,28 @@ const PrevArrow = (props) => {
 export default function CarouselModul() {
   return (
     <div id="modul" className="bg-white dark:bg-gray-900">
-    <div className="lg:ml-28  pt-10 mx-10 ">
-          <h1 className="text-xl lg:text-[36px] font-bold mb-2 text-[#101828] dark:text-white">Modul Terpopuler Kami</h1>
-          <p className="text-[#667085] font-Roboto">Ikuti modul terkenal kami, pengetahuan yang diberikan pasti akan berguna untuk Anda.</p>
-    </div>
-    <div className="container mx-auto flex justify-center items-center h-full pb-10">
-      <div className="max-w-screen-lg md:w-full w-[80%] lg:w-screen">
-        <Carousel />
-        <div className="my-6 ml-4">
-        <a href="/all-modul" className="font-Roboto text-[#22B286] hover:text-gray-400">Lihat Semua</a>
+      <div className="lg:ml-28  pt-10 mx-10 ">
+        <h1 className="text-xl lg:text-[36px] font-bold mb-2 text-[#101828] dark:text-white">
+          Modul Terpopuler Kami
+        </h1>
+        <p className="text-[#667085] font-Roboto">
+          Ikuti modul terkenal kami, pengetahuan yang diberikan pasti akan
+          berguna untuk Anda.
+        </p>
+      </div>
+      <div className="container mx-auto flex justify-center items-center h-full pb-10">
+        <div className="max-w-screen-lg md:w-full w-[80%] lg:w-screen">
+          <Carousel />
+          <div className="my-6 ml-4">
+            <a
+              href="/all-modul"
+              className="font-Roboto text-[#22B286] hover:text-gray-400"
+            >
+              Lihat Semua
+            </a>
+          </div>
         </div>
       </div>
     </div>
-  </div>
   );
 }
